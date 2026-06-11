@@ -14,4 +14,31 @@ The model gets scored not just on whether it reached the right answer but on the
 ## Our contribution
 The key technical contribution is state-dependent information disclosure. The model can only see what a real analyst would see at each step. Remember, think back to that dating-sim example - you can't see ahead of the current choice you're on, only the previous choices you've made and the choice you're presented with at that moment in time.
 
+## Quickstart
+```bash
+python -m pip install -e ".[dev]"
+
+irene list                                         # available incidents
+irene run incidents/phishing_credential_theft.yaml --optimal   # offline, no API key
+
+# Run a model — Claude:
+python -m pip install -e ".[anthropic]"
+$env:ANTHROPIC_API_KEY = "sk-ant-..."
+irene run incidents/phishing_credential_theft.yaml --judge
+
+# ...or any OpenAI-compatible endpoint (vLLM, Together, Groq, Ollama, OpenAI):
+python -m pip install -e ".[openai]"
+irene run incidents/phishing_credential_theft.yaml \
+  --provider openai --model <model-id> --base-url http://localhost:8000/v1
+```
+
+The analyst acts in **free text**; a resolver maps it onto the incident graph, so
+scoring stays deterministic while the interface stays realistic.
+
+## Documentation
+- **[METHODOLOGY.md](METHODOLOGY.md)** — how IRENE scores a model and how that
+  follows current agentic-benchmark literature (verifiable rule-based scoring +
+  LLM-as-judge rubrics over the execution trace).
+- **[CONTRIBUTING.md](CONTRIBUTING.md)** — how to author a new incident and run
+  the benchmark.
 
