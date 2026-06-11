@@ -5,11 +5,7 @@
 Most existing benchmarks treat security as a set of question-answer problems. For example, you give a model a question, it responds, and you score it. However, this does not reflect _real_ incident response (IR). 
 IR is a branching decision tree where every action you take changes what information is available to you, and wrongs turns cost real time. You can compare it to those dating-sim games where your choices impact the ending of the game. Similar idea, anyways.
 
-IRENE models an incident as a _directed graph of states_:
-
-<image>
-
-The model gets scored not just on whether it reached the right answer but on the _quality_ of its reasoning path, how many false leads it followed, how many unnecessary actions it took, and whether its final report accurately reflects what happened. 
+IRENE models an incident as a _directed graph of states_. The model gets scored not just on whether it reached the right answer but on the _quality_ of its reasoning path, how many false leads it followed, how many unnecessary actions it took, and whether its final report accurately reflects what happened. 
 
 ## Our contribution
 The key technical contribution is state-dependent information disclosure. The model can only see what a real analyst would see at each step. Remember, think back to that dating-sim example - you can't see ahead of the current choice you're on, only the previous choices you've made and the choice you're presented with at that moment in time.
